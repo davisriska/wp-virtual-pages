@@ -1,0 +1,17 @@
+{
+  "name": "davisriska/wp-virtual-pages",
+  "description": "Wordpress virtual routes",
+  "keywords": [
+    "wordpress"
+  ],
+  "license": "GPLv2 or later",
+  "authors": [
+    {
+      "name": "davisriska"
+    }
+  ],
+  "type": "wordpress-plugin",
+  "require": {
+    "composer/installers": "~1.0"
+  }
+}
