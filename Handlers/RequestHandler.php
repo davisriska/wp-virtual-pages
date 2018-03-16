@@ -26,11 +26,28 @@
 		}
 		
 		public function handle() {
+			
+			$this->setBodyClass();
+			
 			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				$this->post();
 			} else {
 				$this->get();
 			}
+			
+		}
+		
+		/*
+		 * Adds templates name with -data to body class, only needed if using soberwp/controller
+		 */
+		public function setBodyClass() {
+			add_filter('body_class', function ($classes) {
+				
+				$found = [];
+				preg_match('/\/(\w+)(?:\.blade)?\.php$/', $this->templates[0], $found);
+				
+				return array_merge($classes, [$found[1] . '-data']);
+			});
 		}
 		
 		public function get() {
