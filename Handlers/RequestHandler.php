@@ -11,7 +11,7 @@
 		 */
 		protected $route;
 		
-		public function __construct($template) {
+		public function __construct($template = '') {
 			$this->templates = [$template,
 			                    'page.php',
 			                    'index.php',
@@ -51,7 +51,7 @@
 		}
 		
 		public function get() {
-			do_action('template_redirect');
+			//			do_action('template_redirect');
 			$template = locate_template(array_filter($this->templates));
 			$filtered = apply_filters('template_include', apply_filters('virtual_page_template', $template));
 			if (empty($filtered) || file_exists($filtered)) {

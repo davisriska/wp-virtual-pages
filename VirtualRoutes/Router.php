@@ -60,7 +60,12 @@
 		private function getPathInfo() {
 			$home_path = parse_url(home_url(), PHP_URL_PATH);
 			
-			return preg_replace("#^/?{$home_path}/#", '/', add_query_arg(array()));
+			$url = preg_replace("#^/?{$home_path}/#", '/', add_query_arg(array()));
+			
+			$pathInfo = [];
+			preg_match('/([\w\/]+)\??/', $url, $pathInfo);
+			
+			return $pathInfo[1];
 		}
 		
 		private function setupQuery() {

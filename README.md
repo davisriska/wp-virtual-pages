@@ -12,4 +12,9 @@
 add_action('wp_virtual_routes', function (RouterInterface $router) {
     $router->addRoute(new Route('/users/login', new LoginHandler(), 'User login'));
     $router->addRoute(new Route('/users/profile', new RequestHandler('views/user-profile.blade.php'), 'User profile'));
-});```
+});
+```
+
+### Credits
+
+**Original code came from this wordpress stackexchange answer - https://wordpress.stackexchange.com/questions/162240/custom-pages-with-plugin/162476#162476**
