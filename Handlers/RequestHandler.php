@@ -15,7 +15,6 @@
 			$this->templates = [$template,
 			                    'page.php',
 			                    'index.php',
-			
 			];
 		}
 		
@@ -50,7 +49,7 @@
 			});
 		}
 		
-		public function get() {
+		protected function get() {
 			//			do_action('template_redirect');
 			$template = locate_template(array_filter($this->templates));
 			$filtered = apply_filters('template_include', apply_filters('virtual_page_template', $template));
@@ -62,7 +61,7 @@
 			}
 		}
 		
-		public function post() {
+		protected function post() {
 			wp_redirect(home_url($this->route->getUrl()));
 			exit;
 		}
