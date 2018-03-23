@@ -4,6 +4,8 @@
 	
 	class Router implements RouterInterface {
 		
+		public static $router;
+		
 		private $routes;
 		/**
 		 * @var RouteInterface
@@ -12,6 +14,8 @@
 		
 		function __construct() {
 			$this->routes = new \SplObjectStorage;
+			
+			Router::$router = $this; // Make it available globaly
 		}
 		
 		function init() {
@@ -88,6 +92,36 @@
 		
 		public function handleExit() {
 			exit();
+		}
+		
+		public static function redirect(string $title) {
+			$routes = self::$router->routes;
+			$routes->rewind();
+			
+			while ($routes->valid()) {
+				if (trim($routes->current()->getTitle(), '/') === trim($title, '/')) {
+					wp_redirect($routes->current()->getUrl());
+					
+					return true;
+				}
+				$routes->next();
+			}
+			
+			return false;
+		}
+		
+		public static function getUrlByTitle(string $title) {
+			$routes = self::$router->routes;
+			$routes->rewind();
+			
+			while ($routes->valid()) {
+				if (trim($routes->current()->getTitle(), '/') === trim($title, '/')) {
+					return $routes->current()->getUrl();
+				}
+				$routes->next();
+			}
+			
+			return false;
 		}
 		
 	}
